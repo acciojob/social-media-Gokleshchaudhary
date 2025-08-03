@@ -17,6 +17,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "6.8.1",
+    "@reduxjs/toolkit": "^1.9.5",
+    "react-redux": "^8.0.5"
     "style-loader": "^1.2.1",
     "webpack-cli": "^3.3.12",
     "cypress": "^9.5.0"
