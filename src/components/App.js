@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Navbar from './Navbar';
-import PostList from './PostList';
-import AddPost from './AddPost';
+import Navbar from './components/Navbar';
+import PostList from './components/PostList';
+import AddPost from './components/AddPost';
 
 function App() {
   return (
