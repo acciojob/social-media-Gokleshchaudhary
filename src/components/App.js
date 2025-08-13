@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PostList from './components/PostList';
 import AddPost from './components/AddPost';
+import postsSlice from './components/postsSlice';
+import store from './components/store';
 
 function App() {
   return (
