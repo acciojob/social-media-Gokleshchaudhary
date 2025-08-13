@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.9.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "16.20.2",
+    "react-dom": "16.20.2",
     "react-redux": "8.0.5",
     "react-router-dom": "5.3.4",
     "cypress": "9.5.0",
