@@ -1,33 +1,29 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PostsList from './components/PostsList';
-import AddPostForm from './components/AddPostForm';
-import SinglePostPage from './components/SinglePostPage';
-import EditPostForm from './components/EditPostForm';
-import UsersList from './components/UsersList';
-import UserPage from './components/UserPage';
-import NotificationsList from './components/NotificationsList';
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import PostsList from './features/posts/PostsList'
+import AddPostForm from './features/posts/AddPostForm'
+import SinglePostPage from './features/posts/SinglePostPage'
+import EditPostForm from './features/posts/EditPostForm'
+import UsersList from './features/users/UsersList'
+import UserPage from './features/users/UserPage'
+import NotificationsList from './features/notifications/NotificationsList'
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <h1>GenZ</h1>
-        <nav>
-          <a href="/">Posts</a> | <a href="/users">Users</a> | <a href="/notifications">Notifications</a>
-        </nav>
-        <AddPostForm />
-        <PostsList />
-        <Routes>
-          <Route path="/posts/:postId" element={<SinglePostPage />} />
-          <Route path="/edit/:postId" element={<EditPostForm />} />
-          <Route path="/users" element={<UsersList />} />
-          <Route path="/users/:userId" element={<UserPage />} />
-          <Route path="/notifications" element={<NotificationsList />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    <div className="App">
+      <h1>GenZ</h1>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<><AddPostForm /><PostsList /></>} />
+        <Route path="/posts/:postId" element={<SinglePostPage />} />
+        <Route path="/editPost/:postId" element={<EditPostForm />} />
+        <Route path="/users" element={<UsersList />} />
+        <Route path="/users/:userId" element={<UserPage />} />
+        <Route path="/notifications" element={<NotificationsList />} />
+      </Routes>
+    </div>
+  )
 }
 
-export default App;
+export default App
