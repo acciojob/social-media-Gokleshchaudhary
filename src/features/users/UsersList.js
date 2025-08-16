@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import React from "react"; // ✅ Add this
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const UsersList = () => {
   const users = useSelector((state) => state.users);
@@ -17,4 +18,5 @@ const UsersList = () => {
     </section>
   );
 };
+
 export default UsersList;

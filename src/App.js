@@ -1,4 +1,4 @@
-import React from "react"; // ✅ ये डालना जरूरी है React 16 में
+import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PostsList from "./features/posts/PostsList";
 import AddPostForm from "./features/posts/AddPostForm";
