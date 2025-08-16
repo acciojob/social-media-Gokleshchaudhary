@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React from "react"; // ✅ ये डालना जरूरी है React 16 में
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import PostsList from "./features/posts/PostsList";
 import AddPostForm from "./features/posts/AddPostForm";
 import SinglePostPage from "./features/posts/SinglePostPage";
@@ -13,20 +14,20 @@ function App() {
       <div className="App">
         <h1>GenZ</h1>
         <nav>
-          <a href="/">Posts</a> | <a href="/users">Users</a> |{" "}
-          <a href="/notifications">Notifications</a>
+          <Link to="/">Posts</Link> | <Link to="/users">Users</Link> |{" "}
+          <Link to="/notifications">Notifications</Link>
         </nav>
 
         <AddPostForm />
 
-        <Routes>
-          <Route path="/" element={<PostsList />} />
-          <Route path="/posts/:postId" element={<SinglePostPage />} />
-          <Route path="/editPost/:postId" element={<EditPostForm />} />
-          <Route path="/users" element={<UsersList />} />
-          <Route path="/users/:userId" element={<UserPage />} />
-          <Route path="/notifications" element={<NotificationsList />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/" component={PostsList} />
+          <Route exact path="/posts/:postId" component={SinglePostPage} />
+          <Route exact path="/editPost/:postId" component={EditPostForm} />
+          <Route exact path="/users" component={UsersList} />
+          <Route exact path="/users/:userId" component={UserPage} />
+          <Route exact path="/notifications" component={NotificationsList} />
+        </Switch>
       </div>
     </Router>
   );

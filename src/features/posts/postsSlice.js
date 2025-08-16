@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = [
