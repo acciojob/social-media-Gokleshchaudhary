@@ -16,6 +16,7 @@ const NotificationsList = () => {
       <button className="button" onClick={refresh}>
         Refresh Notifications
       </button>
+
       {notifications.map((n) => (
         <div key={n.id}>{n.message}</div>
       ))}
