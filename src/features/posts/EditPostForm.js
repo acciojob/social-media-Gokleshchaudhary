@@ -1,44 +1,53 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postUpdated } from "./postsSlice";
 
-export default function EditPostForm() {
-  const { postId } = useParams();
-  const post = useSelector((state) => state.posts.find((p) => p.id === postId));
+function EditPostForm({ match, history }) {
+  const { postId } = match.params;
+
+  const post = useSelector((state) =>
+    state.posts.find((post) => post.id === postId)
+  );
+
+  const [title, setTitle] = useState(post ? post.title : "");
+  const [content, setContent] = useState(post ? post.content : "");
+
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [title, setTitle] = useState(post?.title || "");
-  const [content, setContent] = useState(post?.content || "");
 
-  const onSavePostClicked = () => {
-    if (title && content) {
-      dispatch(postUpdated({ id: postId, title, content }));
-      navigate(`/posts/${postId}`);
-    }
-  };
-
-  if (!post)
+  if (!post) {
     return (
       <section>
         <h2>Post not found!</h2>
       </section>
     );
+  }
+
+  const onSavePostClicked = () => {
+    if (title && content) {
+      dispatch(postUpdated({ id: postId, title, content }));
+      history.push(`/posts/${postId}`);
+    }
+  };
 
   return (
     <section>
       <h2>Edit Post</h2>
       <form>
+        <label htmlFor="postTitle">Post Title:</label>
         <input
           id="postTitle"
+          type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
+
+        <label htmlFor="postContent">Content:</label>
         <textarea
           id="postContent"
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
+
         <button type="button" onClick={onSavePostClicked}>
           Save Post
         </button>
@@ -46,3 +55,5 @@ export default function EditPostForm() {
     </section>
   );
 }
+
+export default EditPostForm;

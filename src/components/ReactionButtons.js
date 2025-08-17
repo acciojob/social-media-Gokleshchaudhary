@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { reactionAdded } from "../features/posts/postsSlice";
+import { reactionAdded } from "../features/posts/postsSlice"; // ✅ सही path
 
 const reactionEmoji = {
   thumbsUp: "👍",
-  wow: "😮",
+  hooray: "🎉",
   heart: "❤️",
   rocket: "🚀",
-  coffee: "☕",
+  eyes: "👀",
 };
 
-export default function ReactionButtons({ post }) {
+function ReactionButtons({ post }) {
   const dispatch = useDispatch();
 
   return (
@@ -20,7 +20,6 @@ export default function ReactionButtons({ post }) {
           key={name}
           type="button"
           onClick={() =>
-            name !== "coffee" &&
             dispatch(reactionAdded({ postId: post.id, reaction: name }))
           }
         >
@@ -30,3 +29,5 @@ export default function ReactionButtons({ post }) {
     </div>
   );
 }
+
+export default ReactionButtons;

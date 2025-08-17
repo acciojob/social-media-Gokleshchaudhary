@@ -1,29 +1,27 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import ReactionButtons from "../../components/ReactionButtons"; // ✅ yahan import karo
 
-export default function SinglePostPage() {
+function SinglePostPage() {
   const { postId } = useParams();
   const post = useSelector((state) => state.posts.find((p) => p.id === postId));
-  const navigate = useNavigate();
 
-  if (!post)
+  if (!post) {
     return (
       <section>
         <h2>Post not found!</h2>
       </section>
     );
+  }
 
   return (
-    <section className="post">
+    <article className="post">
       <h2>{post.title}</h2>
       <p>{post.content}</p>
-      <button
-        className="button"
-        onClick={() => navigate(`/editPost/${post.id}`)}
-      >
-        Edit
-      </button>
-    </section>
+      <ReactionButtons post={post} /> {/* ✅ yahan use karo */}
+    </article>
   );
 }
+
+export default SinglePostPage;

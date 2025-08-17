@@ -1,25 +1,30 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export default function UserPage() {
-  const { userId } = useParams();
-  const user = useSelector((state) => state.users.find((u) => u.id === userId));
-  const posts = useSelector((state) =>
-    state.posts.filter((p) => p.user === userId)
+function UserPage({ match }) {
+  const { userId } = match.params;
+
+  const user = useSelector((state) =>
+    state.users.find((user) => user.id === userId)
+  );
+
+  const postsForUser = useSelector((state) =>
+    state.posts.filter((post) => post.user === userId)
   );
 
   return (
     <section>
-      <h2>{user?.name}</h2>
-      <div>
-        {posts.map((p) => (
-          <article key={p.id} className="post">
-            <h3>{p.title}</h3>
-            <p>{p.content}</p>
-          </article>
+      <h2>{user ? user.name : "User not found"}</h2>
+      <ul>
+        {postsForUser.map((post) => (
+          <li key={post.id}>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
+
+export default UserPage;

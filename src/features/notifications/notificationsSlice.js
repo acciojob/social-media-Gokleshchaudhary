@@ -1,14 +1,20 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [];
 
 const notificationsSlice = createSlice({
   name: "notifications",
-  initialState: [],
+  initialState,
   reducers: {
     notificationAdded(state, action) {
-      state.push({ id: nanoid(), message: action.payload });
+      state.push(action.payload);
+    },
+    allNotificationsRead(state) {
+      return state.map((n) => ({ ...n, read: true }));
     },
   },
 });
 
-export const { notificationAdded } = notificationsSlice.actions;
+export const { notificationAdded, allNotificationsRead } =
+  notificationsSlice.actions;
 export default notificationsSlice.reducer;
