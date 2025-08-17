@@ -1,15 +1,13 @@
-import React from 'react';
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdded } from "./postsSlice";
 
-const AddPostForm = () => {
+export default function AddPostForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");
-  const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
   const onSavePostClicked = () => {
     if (title && content && userId) {
@@ -36,9 +34,9 @@ const AddPostForm = () => {
           onChange={(e) => setUserId(e.target.value)}
         >
           <option value=""></option>
-          {users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
+          {users.map((u) => (
+            <option key={u.id} value={u.id}>
+              {u.name}
             </option>
           ))}
         </select>
@@ -46,7 +44,6 @@ const AddPostForm = () => {
           id="postContent"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Content"
         />
         <button type="button" onClick={onSavePostClicked}>
           Save Post
@@ -54,5 +51,4 @@ const AddPostForm = () => {
       </form>
     </section>
   );
-};
-export default AddPostForm;
+}

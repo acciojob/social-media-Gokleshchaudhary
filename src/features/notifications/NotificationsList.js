@@ -1,10 +1,8 @@
-import React from 'react';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { notificationAdded } from "./notificationsSlice";
 
-
-import { useSelector, useDispatch } from "react-redux";
-import { notificationsReceived } from "./notificationsSlice";
-
-const NotificationsList = () => {
+export default function NotificationsList() {
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
 
@@ -13,7 +11,7 @@ const NotificationsList = () => {
       <h2>Notifications</h2>
       <button
         className="button"
-        onClick={() => dispatch(notificationsReceived())}
+        onClick={() => dispatch(notificationAdded("New Notification!"))}
       >
         Refresh Notifications
       </button>
@@ -22,5 +20,4 @@ const NotificationsList = () => {
       ))}
     </section>
   );
-};
-export default NotificationsList;
+}

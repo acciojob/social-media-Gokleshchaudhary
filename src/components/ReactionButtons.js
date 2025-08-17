@@ -1,16 +1,16 @@
-
+import React from "react";
 import { useDispatch } from "react-redux";
-import { reactionAdded } from "./postsSlice";
+import { reactionAdded } from "../features/posts/postsSlice";
 
 const reactionEmoji = {
   thumbsUp: "👍",
+  wow: "😮",
   heart: "❤️",
-  laugh: "😆",
-  wow: "😲",
-  nope: "🚫",
+  rocket: "🚀",
+  coffee: "☕",
 };
 
-const ReactionButtons = ({ post }) => {
+export default function ReactionButtons({ post }) {
   const dispatch = useDispatch();
 
   return (
@@ -20,6 +20,7 @@ const ReactionButtons = ({ post }) => {
           key={name}
           type="button"
           onClick={() =>
+            name !== "coffee" &&
             dispatch(reactionAdded({ postId: post.id, reaction: name }))
           }
         >
@@ -28,5 +29,4 @@ const ReactionButtons = ({ post }) => {
       ))}
     </div>
   );
-};
-export default ReactionButtons;
+}

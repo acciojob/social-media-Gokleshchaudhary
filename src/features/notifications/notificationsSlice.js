@@ -1,18 +1,14 @@
-
-
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-
-const initialState = [];
 
 const notificationsSlice = createSlice({
   name: "notifications",
-  initialState,
+  initialState: [],
   reducers: {
-    notificationsReceived(state) {
-      state.push({ id: nanoid(), message: `Notification ${state.length + 1}` });
+    notificationAdded(state, action) {
+      state.push({ id: nanoid(), message: action.payload });
     },
   },
 });
 
-export const { notificationsReceived } = notificationsSlice.actions;
+export const { notificationAdded } = notificationsSlice.actions;
 export default notificationsSlice.reducer;

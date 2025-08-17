@@ -1,11 +1,11 @@
-import React from 'react';
-
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
 
-const SinglePostPage = () => {
+export default function SinglePostPage() {
   const { postId } = useParams();
   const post = useSelector((state) => state.posts.find((p) => p.id === postId));
+  const navigate = useNavigate();
 
   if (!post)
     return (
@@ -15,13 +15,15 @@ const SinglePostPage = () => {
     );
 
   return (
-    <article className="post">
+    <section className="post">
       <h2>{post.title}</h2>
       <p>{post.content}</p>
-      <Link to={`/editPost/${post.id}`} className="button">
-        Edit Post
-      </Link>
-    </article>
+      <button
+        className="button"
+        onClick={() => navigate(`/editPost/${post.id}`)}
+      >
+        Edit
+      </button>
+    </section>
   );
-};
-export default SinglePostPage;
+}

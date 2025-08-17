@@ -1,57 +1,53 @@
-
-
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-
-const initialState = [
-  {
-    id: "1",
-    title: "First Post!",
-    content: "Hello world!",
-    user: "1",
-    reactions: { thumbsUp: 0, heart: 0, laugh: 0, wow: 0, nope: 0 },
-  },
-  {
-    id: "2",
-    title: "Second Post",
-    content: "More content here...",
-    user: "2",
-    reactions: { thumbsUp: 0, heart: 0, laugh: 0, wow: 0, nope: 0 },
-  },
-];
 
 const postsSlice = createSlice({
   name: "posts",
-  initialState,
+  initialState: [
+    {
+      id: "1",
+      title: "First Post!",
+      content: "Hello!",
+      user: "1",
+      reactions: { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 },
+    },
+    {
+      id: "2",
+      title: "Second Post",
+      content: "More text",
+      user: "2",
+      reactions: { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 },
+    },
+  ],
   reducers: {
     postAdded: {
       reducer(state, action) {
         state.push(action.payload);
       },
-      prepare(title, content, userId) {
+      prepare(title, content, user) {
         return {
           payload: {
             id: nanoid(),
             title,
             content,
-            user: userId,
-            reactions: { thumbsUp: 0, heart: 0, laugh: 0, wow: 0, nope: 0 },
+            user,
+            reactions: { thumbsUp: 0, wow: 0, heart: 0, rocket: 0, coffee: 0 },
           },
         };
       },
     },
     postUpdated(state, action) {
       const { id, title, content } = action.payload;
-      const existingPost = state.find((post) => post.id === id);
-      if (existingPost) {
-        existingPost.title = title;
-        existingPost.content = content;
+      const existing = state.find((p) => p.id === id);
+      if (existing) {
+        existing.title = title;
+        existing.content = content;
       }
     },
     reactionAdded(state, action) {
       const { postId, reaction } = action.payload;
-      const existingPost = state.find((post) => post.id === postId);
-      if (existingPost && reaction !== "nope") {
-        existingPost.reactions[reaction]++;
+      const existing = state.find((p) => p.id === postId);
+      if (existing) {
+        existing.reactions[reaction]++;
       }
     },
   },

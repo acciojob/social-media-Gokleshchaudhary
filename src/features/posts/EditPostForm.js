@@ -1,20 +1,17 @@
-import React from 'react';
-
-
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { postUpdated } from "./postsSlice";
 
-const EditPostForm = () => {
+export default function EditPostForm() {
   const { postId } = useParams();
   const post = useSelector((state) => state.posts.find((p) => p.id === postId));
-  const [title, setTitle] = useState(post?.title || "");
-  const [content, setContent] = useState(post?.content || "");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [title, setTitle] = useState(post?.title || "");
+  const [content, setContent] = useState(post?.content || "");
 
-  const onSave = () => {
+  const onSavePostClicked = () => {
     if (title && content) {
       dispatch(postUpdated({ id: postId, title, content }));
       navigate(`/posts/${postId}`);
@@ -29,22 +26,23 @@ const EditPostForm = () => {
     );
 
   return (
-    <section className="post">
+    <section>
       <h2>Edit Post</h2>
-      <input
-        id="postTitle"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        id="postContent"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      <button className="button" onClick={onSave}>
-        Save Post
-      </button>
+      <form>
+        <input
+          id="postTitle"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <textarea
+          id="postContent"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <button type="button" onClick={onSavePostClicked}>
+          Save Post
+        </button>
+      </form>
     </section>
   );
-};
-export default EditPostForm;
+}

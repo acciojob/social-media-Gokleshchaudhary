@@ -1,11 +1,11 @@
-import React from 'react'
-
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import ReactionButtons from "./ReactionButtons";
+import ReactionButtons from "../../components/ReactionButtons";
 
-const PostsList = () => {
+export default function PostsList() {
   const posts = useSelector((state) => state.posts);
+  const users = useSelector((state) => state.users);
 
   return (
     <section className="posts-list">
@@ -14,6 +14,7 @@ const PostsList = () => {
         <article key={post.id} className="post">
           <h3>{post.title}</h3>
           <p>{post.content}</p>
+          <p>by {users.find((u) => u.id === post.user)?.name}</p>
           <ReactionButtons post={post} />
           <Link to={`/posts/${post.id}`} className="button">
             View Post
@@ -22,5 +23,4 @@ const PostsList = () => {
       ))}
     </section>
   );
-};
-export default PostsList;
+}
