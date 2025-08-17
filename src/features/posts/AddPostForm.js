@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAdded } from "./postsSlice";
 
-function AddPostForm({ history }) {
+const AddPostForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");
-
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
 
@@ -15,8 +14,6 @@ function AddPostForm({ history }) {
       dispatch(postAdded(title, content, userId));
       setTitle("");
       setContent("");
-      setUserId("");
-      history.push("/");
     }
   };
 
@@ -24,15 +21,13 @@ function AddPostForm({ history }) {
     <section>
       <h2>Add a New Post</h2>
       <form>
-        <label htmlFor="postTitle">Post Title:</label>
         <input
           type="text"
           id="postTitle"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          placeholder="Post Title"
         />
-
-        <label htmlFor="postAuthor">Author:</label>
         <select
           id="postAuthor"
           value={userId}
@@ -45,20 +40,18 @@ function AddPostForm({ history }) {
             </option>
           ))}
         </select>
-
-        <label htmlFor="postContent">Content:</label>
         <textarea
           id="postContent"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          placeholder="Post Content"
         />
-
         <button type="button" onClick={onSavePostClicked}>
           Save Post
         </button>
       </form>
     </section>
   );
-}
+};
 
 export default AddPostForm;

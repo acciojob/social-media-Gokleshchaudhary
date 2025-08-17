@@ -1,19 +1,26 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 
-function NotificationsList() {
-  const notifications = useSelector((state) => state.notifications);
+const NotificationsList = () => {
+  const [notifications, setNotifications] = useState([]);
+
+  const refresh = () => {
+    setNotifications([
+      { id: 1, message: "New comment on your post" },
+      { id: 2, message: "New like on your post" },
+    ]);
+  };
 
   return (
-    <section>
+    <section className="notificationsList">
       <h2>Notifications</h2>
-      <ul>
-        {notifications.map((n, i) => (
-          <li key={i}>{n.message}</li>
-        ))}
-      </ul>
+      <button className="button" onClick={refresh}>
+        Refresh Notifications
+      </button>
+      {notifications.map((n) => (
+        <div key={n.id}>{n.message}</div>
+      ))}
     </section>
   );
-}
+};
 
 export default NotificationsList;

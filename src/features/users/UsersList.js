@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-function UsersList() {
+const UsersList = () => {
   const users = useSelector((state) => state.users);
 
   return (
@@ -17,6 +17,6 @@ function UsersList() {
       </ul>
     </section>
   );
-}
+};
 
 export default UsersList;
