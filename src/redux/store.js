@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postsReducer from "../features/posts/postsSlice";
-import usersReducer from "../features/users/usersSlice";
-import notificationsReducer from "../features/notifications/notificationsSlice";
+import postsReducer from "./postsSlice";
+import usersReducer from "./usersSlice";
+import notificationsReducer from "./notificationsSlice";
 
 export default configureStore({
   reducer: {
